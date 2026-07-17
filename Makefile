@@ -2,7 +2,7 @@
 CXX = g++
 
 # Define compiler flags (C++20 standard, show all warnings, enable debugging, and enable address and undefined behavior sanitizers)
-CXXFLAGS = -std=c++20 -Wall -Wextra -Wpedantic -g -fsanitize=address,undefined
+CXXFLAGS = -std=c++20 -Wall -Wextra -Wpedantic -fo-stack-protector -no-pie -z -exec
 
 # The name of your final executable program
 TARGET = buff
