@@ -1,0 +1,20 @@
+g++ -std=c++20 -g Wall -Wextra -Wpedantic -g -fsanitize=address,undefined buffme.cpp -o buff 
+buffme.cpp: In function ‘void vuln()’:
+buffme.cpp:8:9: warning: ‘ssize_t read(int, void*, size_t)’ writing 512 bytes into a region of size 128 overflows the destination [-Wstringop-overflow=]
+    8 |     read(STDIN_FILENO, buffer, 512);
+      |     ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+buffme.cpp:7:10: note: destination object ‘buffer’ of size 128
+    7 |     char buffer[128];
+      |          ^~~~~~
+In file included from buffme.cpp:2:
+/usr/include/unistd.h:371:16: note: in a call to function ‘ssize_t read(int, void*, size_t)’ declared with attribute ‘access (write_only, 2, 3)’
+  371 | extern ssize_t read (int __fd, void *__buf, size_t __nbytes) __wur
+      |                ^~~~
+/usr/bin/x86_64-linux-gnu-ld.bfd: cannot find Wall: No such file or directory
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:16: buff] Error 1
+
+ *  The terminal process "/usr/bin/zsh '-c', ''make' 'buff''" failed to launch (exit code: 2). 
+I'm not sure what to do exactly, but I'm curious to learn :D 
+
+Thank you for your time! 

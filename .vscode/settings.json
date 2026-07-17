@@ -9,6 +9,11 @@
             "cwd": "/home/surzal/learncpp",
             "binaryPath": "/home/surzal/learncpp/xor",
             "binaryArgs": []
+        },
+        {
+            "cwd": "/home/surzal/learncpp",
+            "binaryPath": "/home/surzal/learncpp/buff",
+            "binaryArgs": []
         }
     ]
 }
