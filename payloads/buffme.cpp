@@ -7,7 +7,7 @@ int main(void) {
     char buffer[128];
     read(STDIN_FILENO, buffer, 512);
     printf("Buffer content: %s\n", buffer);
-    if (strstr(buffer, "password")) { // Check if the buffer contains "password"
+    if (strstr(buffer, "password")) { 
         printf("Access granted!\n");
         system("/bin/sh");
         exit(0);
