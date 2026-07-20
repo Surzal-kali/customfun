@@ -1,50 +1,21 @@
 # Design Document for C2 Framework
 
-At the end of the day, I constantly hear about frameworks being stuck in one pattern, with easily identifiable IoCs
+At the end of the day, I constantly hear about frameworks being stuck in one pattern, with easily identifiable IoCs.
+
+Some goals: 
+    cli and terminal driven
+    expandability and flexibility in payloads
+
 
 
 ## Legalise note:
 
 Do not actually try this at home kids. I built this to impress employeers, not to cause damage :D
 
-## Common Vectors
+## Feature Ideas:
 
-- **File Inclusion**
-- **API Calls**
-- **Function Calls**
-- **Memory Manipulation**
-- **String Manipulation**
-- 
-
-## Common IoCs
-- Cloudflare Tunnel
-- Cloudflare Workers
-- Discord Webhook 
-- Dropbox 
-- Duplicati
-- Jottacloud
-- Koofr
-- LimeWire //this makes me giggle at the thought
-- localhost.run
-- LocalXpose
-- Mastodon API
-- MEGA
-- ngrok
-- Proton Drive
-- Rclone
-- Temp.sh
-- Webhook.site
-- Zulip
-
-## Catagories
-
-- File Upload (Must be executable)
-
-- Front-Facing APIs (HTTP, HTTPS, etc.)
-
-    - Webhooks
-    - APIs
-    - Cookies
-- Direct Phishing/Vishing (this would require alot of prefabricated content. but probably the easiest)
-    
-- 
+- **Dynamic Code Loading:** Load packages and code with a watcher script/thread.
+- **Customizable Payloads:** Different payloads for different targets. (perhaps a text editor)
+- **Command Line Interface:** Simple and powerful CLI for quick interactions.
+- **Persistence Mechanisms:** Ensure the agent stays running across reboots. (possible)
+- **Network Communication:** Reliable and encrypted communication channels
