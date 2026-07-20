@@ -14,6 +14,7 @@ Do not actually try this at home kids. I built this to impress employeers, not t
 - **Function Calls**
 - **Memory Manipulation**
 - **String Manipulation**
+- 
 
 ## Common IoCs
 - Cloudflare Tunnel
@@ -34,3 +35,16 @@ Do not actually try this at home kids. I built this to impress employeers, not t
 - Temp.sh
 - Webhook.site
 - Zulip
+
+## Catagories
+
+- File Upload (Must be executable)
+
+- Front-Facing APIs (HTTP, HTTPS, etc.)
+
+    - Webhooks
+    - APIs
+    - Cookies
+- Direct Phishing/Vishing (this would require alot of prefabricated content. but probably the easiest)
+    
+- 
