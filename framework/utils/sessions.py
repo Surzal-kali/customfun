@@ -1,67 +1,73 @@
 import sqlite3
 
 
-class Database_Manager():
-    def init_db():
-        conn = sqlite3.connect('ids.db')
-        c = conn.cursor()
-        c.execute('''CREATE TABLE IF NOT EXISTS targets
+class Database_Manager:
+    def __init__(self):
+        self.conn = sqlite3.connect('ids.db')
+        self.c = self.conn.cursor()
+        self._init_db()
+
+    def _init_db(self):
+        self.c.execute('''CREATE TABLE IF NOT EXISTS targets
                     (id INTEGER PRIMARY KEY, ip_address TEXT, port INTEGER, status TEXT)''')
-        c.execute('''CREATE TABLE IF NOT EXISTS sessions
+        self.c.execute('''CREATE TABLE IF NOT EXISTS sessions
                     (id INTEGER PRIMARY KEY, target_id INTEGER, payload TEXT, status TEXT, start_time DATETIME, end_time DATETIME, note TEXT,
                     FOREIGN KEY(target_id) REFERENCES targets(id))''')
-        c.execute('''CREATE TABLE IF NOT EXISTS notes
+        self.c.execute('''CREATE TABLE IF NOT EXISTS notes
                     (id INTEGER PRIMARY KEY, target_id INTEGER, note TEXT,
                     FOREIGN KEY(target_id) REFERENCES targets(id))''')
-        conn.commit()
-        return conn, c
+        self.conn.commit()
+    def add_target(self, ip_address, port):
+        try:
+            self.c.execute("INSERT INTO targets (ip_address, port, status) VALUES (?, ?, 'active')", (ip_address, port))
+            self.conn.commit()
+        except sqlite3.Error as e:
+            return f"Error adding target: {e}"
+        return "Target added"
 
-    def add_target(ip_address, port):
-        conn = sqlite3.connect('ids.db')
-        c = conn.cursor()
-        c.execute("INSERT INTO targets (ip_address, port, status) VALUES (?, ?, 'active')", (ip_address, port))
-        conn.commit()
-        return conn, c
+    def get_active_targets(self):
+        try:
+            self.c.execute("SELECT * FROM targets WHERE status = 'active'")
+            return self.c.fetchall()
+        except sqlite3.Error as e:
+            return f"Error getting active targets: {e}"
+    def get_target_by_ip(self, ip_address):
+        try:
+            self.c.execute("SELECT * FROM targets WHERE ip_address = ?", (ip_address,))
+            return self.c.fetchall()
+        except sqlite3.Error as e:
+            return f"Error getting target by IP: {e}"
 
-    def get_active_targets():
-        conn = sqlite3.connect('ids.db')
-        c = conn.cursor()
-        c.execute("SELECT * FROM targets WHERE status = 'active'")
-        rows = c.fetchall()
-        return rows, conn, c
-    
-    def get_target_by_ip(ip_address):
-        conn = sqlite3.connect('ids.db')
-        c = conn.cursor()
-        c.execute("SELECT * FROM targets WHERE ip_address ={ip_address}".format(ip_address=ip_address))
-        rows = c.fetchall()
-        return rows, conn, c
+    def get_target_ips(self):
+        try:
+            self.c.execute("SELECT ip_address FROM targets")
+            return [row[0] for row in self.c.fetchall()]
+        except sqlite3.Error as e:
+            return f"Error getting target IPs: {e}"
 
-    def get_target_ips():
-        conn = sqlite3.connect('ids.db')
-        c = conn.cursor()
-        c.execute("SELECT ip_address FROM targets")
-        rows = c.fetchall()
-        return rows, conn, c
+    def add_note(self, target_id, note):
+        try:
+            self.c.execute("INSERT INTO notes (target_id, note) VALUES (?, ?)", (target_id, note))
+            self.conn.commit()
+            return "Note added"
+        except sqlite3.Error as e:
+            return f"Error adding note: {e}"
 
-    def add_note(target_id, note):
-        conn = sqlite3.connect('ids.db')
-        c = conn.cursor()
-        c.execute("INSERT INTO notes (target_id, note) VALUES (?, ?)", (target_id, note))
-        conn.commit()
-        return "Note added", conn, c
+    def add_session(self, target_id, payload):
+        try:
+            self.c.execute("INSERT INTO sessions (target_id, payload, status, start_time) VALUES (?, ?, 'active', CURRENT_TIMESTAMP)", (target_id, payload))
+            self.conn.commit()
+        except sqlite3.Error as e:
+            return f"Error adding session: {e}"
+        return "Session added"
 
-
-    def add_session(target_id, payload):
-        conn = sqlite3.connect('ids.db')
-        c = conn.cursor()
-        c.execute("INSERT INTO sessions (target_id, payload, status, start_time) VALUES (?, ?, 'active', CURRENT_TIMESTAMP)", (target_id, payload))
-        conn.commit()
-        return conn, c
-
-    def close_db():
-        conn = sqlite3.connect('ids.db')
-        c = conn.cursor()
-        conn.close()
+    def close_db(self):
+        self.conn.close()
         return "Database closed"
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close_db()
 
