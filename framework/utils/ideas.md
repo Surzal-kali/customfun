@@ -1,5 +1,4 @@
 # Utils Ideas:
 
 - **Packet Crafting**
-- **Packet Sniffing**
-- **API Call Crafting**
+  - Functions to create and manipulate network packets. (scapy)
