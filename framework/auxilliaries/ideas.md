@@ -1,4 +1,4 @@
-# Auxilliaries Ideas:
+# Auxilliaries Ideas
 
 - **Packet Capture:** Capture and analyze network packets.
 - **Port Scanning:** Scan open ports on a target
