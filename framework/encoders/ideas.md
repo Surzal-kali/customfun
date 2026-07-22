@@ -1,1 +1,6 @@
-(TBA...I've yet to learn this part of the process)
+# Encoding Ideas
+
+- **Embedded Images**
+- **Base64 Encoding**
+- **Ciphers**
+

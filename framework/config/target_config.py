@@ -3,7 +3,7 @@ import sys
 import shutil
 import subprocess
 
-MAKEFILE = open ("Makefile")
+MAKEFILE = open("Makefile")
 
 DEFAULTS = {
     "TARGET_IP": "127.0.0.1",
