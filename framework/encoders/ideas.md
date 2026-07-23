@@ -3,4 +3,4 @@
 - **Embedded Images**
 - **Base64 Encoding**
 - **Ciphers**
-
+- **Unicode Manipulation**

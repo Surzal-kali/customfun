@@ -17,6 +17,9 @@ class Database_Manager:
                     (id INTEGER PRIMARY KEY, target_id INTEGER, note TEXT,
                     FOREIGN KEY(target_id) REFERENCES targets(id))''')
         self.conn.commit()
+
+
+        
     def add_target(self, ip_address, port):
         try:
             self.c.execute("INSERT INTO targets (ip_address, port, status) VALUES (?, ?, 'active')", (ip_address, port))
