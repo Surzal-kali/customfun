@@ -1,9 +1,8 @@
-from scapy.all import ICMP, IP, sr, sr1, ARP, Ether, conf, TCP
+from scapy.all import ICMP, IP, sr, sr1, ARP, Ether, conf, TCP, srp
 import socket
 from ipaddress import ip_network
 import logging
 
-# Disable the default scapy verbosity
 # This line disables the "MAC address not found" warnings globally
 conf.verb = 0 
 
@@ -12,12 +11,12 @@ logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 
 def sendp_custom(packet, *args, **kwargs):
     try:
-        return sr1(packet, *args, **kwargs)
+        return srp(packet, *args, **kwargs)
     except Exception as e:
         print(f"[-] Error during packet send: {e}")
         return None, None
 
-def syn_scan(ip_range, port=443):
+def syn_scan(ip_range, port=80):
     print(f"[*] Performing batch SYN scan on {port}...")
     # Create a list of packets
     packets = [IP(dst=str(ip))/TCP(dport=port, flags="S") for ip in ip_range]
