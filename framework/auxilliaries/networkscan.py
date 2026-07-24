@@ -122,12 +122,4 @@ def ping_scan(target_ip):
     return ans is not None
 
 
-if __name__ == "__main__":
-    ip_range = "10.0.0.0/24"
-
-    # 2. Use ARP to get MACs for the local network
-    alive_ips = arp_scan(ip_range)
-    # 1. Use ICMP to see who is alive across the range
-    icmp_sweep(ip_range)
-
 

