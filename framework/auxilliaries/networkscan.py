@@ -130,8 +130,4 @@ if __name__ == "__main__":
     # 1. Use ICMP to see who is alive across the range
     icmp_sweep(ip_range)
 
-    # 3. Now that we have targets, let's try a SYN scan on one of them
-    if alive_ips:
-        test_target = alive_ips[0]
-        syn_scan_concurrent(test_target, ports=[22, 80, 443, 8080])
 
